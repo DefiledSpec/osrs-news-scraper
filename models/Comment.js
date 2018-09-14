@@ -1,12 +1,22 @@
-let mongoose = require("mongoose");
+let mongoose = require('mongoose')
 
-let Schema = mongoose.Schema;
+let Schema = mongoose.Schema
 
 let CommentSchema = new Schema({
-  title: String,
-  body: String
-});
+	name: {
+		type: String,
+		default: 'Anonymous'
+	},
+  	body: {
+		type: String,
+		required: true
+  	} ,
+  	postedAt: {
+	  	type: Date,
+	  	default: Date.now()
+  	}
+})
 
-let Comment = mongoose.model("Comment", CommentSchema);
+let Comment = mongoose.model('Comment', CommentSchema)
 
-module.exports = Comment;
+module.exports = Comment

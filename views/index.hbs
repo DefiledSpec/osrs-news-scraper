@@ -1,1 +1,15 @@
-<h1>Home Page</h1>
+<h2>Home Page</h2>
+<div class="row">
+	{{#each articles}}
+		<article class="osrsArticle card col m4 s10" id={{ this._id }}>
+			<div class="card-image">
+				<img class="responsive-img" src="{{ this.img }}" alt="">
+			</div>
+			<div class="card-content">
+				<span class="card-title">{{ this.title }}</span>
+				<p>{{{ this.summary }}} <a href={{ this.link }}>Read more</a></p>
+				<p>Comments: {{ this.commentLength }}</p>
+			</div>
+		</article>
+	{{/each }}
+</div>

@@ -1,0 +1,22 @@
+<h3>{{article.title}}</h3>
+
+<img src={{article.img}} alt="">
+
+<p>{{ article.summary }}</p>
+
+<h4>Comments:</h4>
+<form id="commentForm">
+	<label for="name">Username</label>
+	<input class="input-field" id="name" name="name" type="text">
+	<label for="comment">Add Comment</label>
+	<input class="input-field validate" id="commentInput" name="comment" type="text" required>
+	<button class="addComment" type="submit" data-id={{article._id}}>Submit</button>
+</form>
+
+{{#each article.comment}}
+	<div class="comment">
+		<span>{{this.name}}</span>
+		<p>{{ this.body }}</p>
+		<span><small>{{this.postedAt}}</small></span>
+	</div>
+{{/each}}
