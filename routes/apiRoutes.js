@@ -53,7 +53,7 @@ router.get('/articles', async (req, res) => {
 
 router.post('/articles/:id', async (req, res) => {
 	try {
-		const	comment = await db.Comment.create(req.body)
+		const comment = await db.Comment.create(req.body)
 		const article = await db.Article.findOneAndUpdate(
 				{ _id: mongojs.ObjectId(req.params.id) },
 				{ $push: { comment: comment._id } },
