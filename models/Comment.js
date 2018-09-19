@@ -10,7 +10,11 @@ let CommentSchema = new Schema({
   	body: {
 		type: String,
 		required: true
-  	} ,
+	},
+	deleted: {
+		type: Boolean,
+		default: false
+	},
   	postedAt: {
 	  	type: Date,
 	  	default: Date.now()

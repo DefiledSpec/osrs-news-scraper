@@ -1,16 +1,99 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+@font-face {
+	font-family: osrsFont;
+	src: url(runescape_uf.ttf) format('truetype');
+}
+
+body {
+	font-family: osrsFont, 'Roboto';
+	box-sizing: border-box;
+	background: url(../img/osrs.jpg) repeat repeat;
+}
+
+nav {
+	background: #ccb07b;
+}
+
+nav > a {
+	color: black;
+}
+
+nav > a, nav > button {
+	margin: 0 1em;
+}
+
+label {
+	color: black;
+}
+
+footer {
+	color: black;
+	text-align: center;
+	padding: 0;
+	background: #ccb07b;
+	padding: .25em .5em;
+	margin-top: 3em;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+
+footer > p {
+	margin: 0;
+}
+
+/** Classes */
+
 div.comment {
 	border: 1px solid black;
-	margin: 1em auto;
-
+	margin: 1em 0; 
+	border-radius: 3px;
 	padding: .5em 1em;
 	width: max-content;
 }
 
+div.comment:last-of-type {
+	margin-bottom: 6em;
+}
+
+article.osrsArticle {
+	height: 500px;
+	margin: 1em 0 4em 0;
+}
+
+button.addComment {
+	margin-top: .5em;
+}
+
+.scroll-bg {
+	background: url('https://www.runescape.com/img/rsp777/scroll/backdrop_745.gif') repeat-y top center;
+	color: black;
+}
+
+.scroll {
+	background: url('https://www.runescape.com/img/rsp777/scroll/backdrop_745.gif') repeat-y top center;
+	padding: 50px 75px;
+	color: black;
+}
+
+.title, .summary, .white-text {
+	color: ghostwhite;
+}
+
+.del {
+	float: right;
+}
+
+
+/** Id's */
 
 form#commentForm {
 	width: 450px;
 	margin: 0 auto;
 	border: 1px solid black;
-	padding: .5em 1em;
-
+	padding: 1em 2em;
+	border-radius: 3px;
+	margin: 2em 0 4em 0;
 }

@@ -1,15 +1,28 @@
-<h2>Home Page</h2>
+<h2 class="title">Oldschool Runescape News Scraper</h2>
+<hr>
 <div class="row">
+	{{#unless articles }}
+	<p class="white-text">No articles to disply! <a href="/api/scrape">Scrape more!</a></p>
+	{{/unless }}
+
 	{{#each articles}}
-		<article class="osrsArticle card col m4 s10" id={{ this._id }}>
+	<div class="col m4 s10">
+		<article class="osrsArticle card scroll-bg" >
 			<div class="card-image">
+				
 				<img class="responsive-img" src="{{ this.img }}" alt="">
 			</div>
 			<div class="card-content">
-				<span class="card-title">{{ this.title }}</span>
-				<p>{{{ this.summary }}} <a href={{ this.link }}>Read more</a></p>
-				<p>Comments: {{ this.commentLength }}</p>
+				<span id={{ this._id }} class="card-title truncate">{{ this.title }}</span>
+				<hr>
+				<p>{{{ this.summary }}}</p>
+				<p class="blue-text text-lighten-1">Comments: {{ this.commentLength }}</p>
+				<button data-id={{ this._id }} class="view btn blue">View</button>
+				{{#unless this.saved }}
+				<button data-id={{ this._id }} class="save btn green">Save</button>
+				{{/unless }}
 			</div>
 		</article>
+	</div>
 	{{/each }}
 </div>

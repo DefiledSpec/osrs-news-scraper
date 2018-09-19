@@ -18,6 +18,10 @@ let ArticleSchema = new Schema({
 	summary: {
 		type: String
 	},
+	saved: {
+		type: Boolean,
+		default: false
+	},
 	comment: [
 		{
 			type: Schema.Types.ObjectId,
