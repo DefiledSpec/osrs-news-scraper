@@ -1,6 +1,6 @@
-let router = require('express').Router()
-let db = require('../models')
-let mongojs = require('mongojs')
+const router = require('express').Router()
+const db = require('../models')
+const mongojs = require('mongojs')
 
 router.get('/', async (req, res) => {
 	let articles
@@ -8,6 +8,7 @@ router.get('/', async (req, res) => {
 		articles = await db.Article.find({}).populate('comment')
 		articles.forEach(article => article.commentLength = article.comment.length)
 	} catch(err) {
+		res.end()
 		throw err
 	} finally {
 		res.render('index', { articles })
@@ -20,19 +21,23 @@ router.get('/saved', async (req, res) => {
 		savedArticles = await db.Article.find({saved: true}).populate('comment')
 		savedArticles.forEach(saved => saved.commentLength = saved.comment.length)
 	} catch (err) {
+		res.end()
 		throw err
 	} finally {
 		res.render('saved', { articles: savedArticles })
 	}
 })
 
-router.get('/articles/:id', (req, res) => {
-	db.Article.find({ _id: mongojs.ObjectId(req.params.id) })
-		.populate('comment')
-		.then(article => {
-			res.render('article', { article: article[0] })
-		})
-		.catch(err => { throw err })
+router.get('/articles/:id', async (req, res) => {
+	try {
+		const article = await db.Article
+			.find({ _id: mongojs.ObjectId(req.params.id) })
+			.populate('comment')
+		res.render('article', { article: article[0] })
+	} catch(err) {
+		res.end()
+		throw err
+	}
 })
 
 module.exports = router
