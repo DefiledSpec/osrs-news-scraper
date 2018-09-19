@@ -1,14 +1,14 @@
-let express = require('express')
-let bodyParser = require('body-parser')
-let logger = require('morgan')
-let hbs = require('express-handlebars')
-let mongoose = require('mongoose')
-let indexRoutes = require('./routes/indexRoutes')
-let apiRoutes = require('./routes/apiRoutes')
+const express = require('express')
+const bodyParser = require('body-parser')
+const logger = require('morgan')
+const hbs = require('express-handlebars')
+const mongoose = require('mongoose')
+const indexRoutes = require('./routes/indexRoutes')
+const apiRoutes = require('./routes/apiRoutes')
 
-let app = express()
+const app = express()
 const PORT = process.env.PORT || 3000
-let MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mongoHeadlines'
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mongoHeadlines'
 
 app.use(logger('dev'))
 
