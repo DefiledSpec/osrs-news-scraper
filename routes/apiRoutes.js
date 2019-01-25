@@ -5,40 +5,53 @@ const cheerio = require('cheerio')
 const mongojs = require('mongojs')
 const newsLink = 'https://oldschool.runescape.com/'
 const Article = require('../models/Article')
+const scraper = require('../scrapeNews')
 
 router.get('/scrape', async (req, res) => {
+	// try {
+	// 	const html = await axios.get(newsLink)
+	// 	const $ = cheerio.load(html.data)
+	// 	$('article.news-article').each( async (i, element) => {
+	// 		let result = {}
+	// 		result.title = $(element).children('div.news-article__details').children('h3').text()
+	// 		result.link  = $(element).children('div.news-article__details').children('h3').children('a').attr('href')
+	// 		result.img   = $(element).children('figure').children('a').children('img').attr('src')
+	// 		result.summary = $(element).children('div.news-article__details').children('p').text()
+	// 		let article = new Article(result)
+	// 		article.saveSummary()
+	// 		try {
+	// 			await db.Article.create(article)
+	// 		} catch(err) {
+	// 			console.log(err)
+	// 		}
+	// 	})
+	// 	res.redirect('/')
+	// } catch(err) {
+	// 	res.redirect('/')
+	// 	throw err
+	// }
 	try {
-		const html = await axios.get(newsLink)
-		const $ = cheerio.load(html.data)
-		$('article.news-article').each( async (i, element) => {
-			let result = {}
-			result.title = $(element).children('div.news-article__details').children('h3').text()
-			result.link  = $(element).children('div.news-article__details').children('h3').children('a').attr('href')
-			result.img   = $(element).children('figure').children('a').children('img').attr('src')
-			result.summary = $(element).children('div.news-article__details').children('p').text()
-			let article = new Article(result)
-			article.saveSummary()
-			try {
-				await db.Article.create(article)
-			} catch(err) {
-				console.log(err)
-			}
-		})
-		res.redirect('/')
-	} catch(err) {
-		res.redirect('/')
-		throw err
+		let result = await scraper()
+		if (result.ok) {
+			res.redirect('/')
+		} else {
+			res.redirect('/')
+			console.log(err)
+		}
+	} catch (err) {
+		console.log(err)
 	}
 })
 
 router.get('/add', async (req, res) => {
-	try {
-		const article = await db.Article.create({title: 'hi', link: 'hello'})
-		res.json(article)
-	} catch(err) {
-		res.end()
-		throw err
-	}
+	// try {
+	// 	const article = await db.Article.create({title: 'hi', link: 'hello'})
+	// 	res.json(article)
+	// } catch(err) {
+	// 	res.end()
+	// 	throw err
+	// }
+	res.redirect('/')
 })
 
 router.get('/articles', async (req, res) => {

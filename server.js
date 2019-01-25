@@ -5,9 +5,11 @@ const hbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const indexRoutes = require('./routes/indexRoutes')
 const apiRoutes = require('./routes/apiRoutes')
+const schedule = require('node-schedule')
+const scraper = require('./scrapeNews')
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mongoHeadlines'
 
 app.use(logger('dev'))
@@ -25,4 +27,18 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
 app.use('/', indexRoutes)
 app.use('/api', apiRoutes)
 
-app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`))
+app.listen(PORT, () => {
+	console.log(`App listening at http://localhost:${PORT}`)
+	schedule.scheduleJob('0 0 * * *', () => { 
+		console.log('Retrieving new news posts!')
+		schedule.scheduleJob('0 0 * * *', async () => {
+			try {
+				let results = await scraper()
+				console.log(results)
+			} catch (error) {
+				console.log('Unable to scrape news.')
+				console.log(error)
+			}
+		})
+	})
+})

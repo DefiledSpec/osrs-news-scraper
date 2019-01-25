@@ -17,6 +17,7 @@
 				<hr>
 				<p>{{{ this.summary }}}</p>
 				<p class="blue-text text-lighten-1">Comments: {{ this.commentLength }}</p>
+				<button data-id={{ this._id }} class="btn red del">X</button>
 				<button data-id={{ this._id }} class="view btn blue">View</button>
 				{{#unless this.saved }}
 				<button data-id={{ this._id }} class="save btn green">Save</button>
