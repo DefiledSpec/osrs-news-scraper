@@ -7,6 +7,7 @@ router.get('/', async (req, res) => {
 	try {
 		articles = await db.Article.find({}).populate('comment')
 		articles.forEach(article => article.commentLength = article.comment.length)
+		articles.reverse()
 	} catch(err) {
 		res.end()
 		throw err
