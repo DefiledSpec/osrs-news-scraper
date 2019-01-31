@@ -7,6 +7,7 @@ const indexRoutes = require('./routes/indexRoutes')
 const apiRoutes = require('./routes/apiRoutes')
 const schedule = require('node-schedule')
 const scraper = require('./scrapeNews')
+const http = require('http')
 
 const app = express()
 const PORT = process.env.PORT || 3001
@@ -41,4 +42,7 @@ app.listen(PORT, () => {
 			}
 		})
 	})
+	setInterval(function() {
+		http.get("http://osrs-news-scraper.herokuapp.com");
+	}, 300000); // every 5 minutes (300000)
 })
