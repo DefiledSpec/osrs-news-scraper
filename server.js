@@ -44,5 +44,5 @@ app.listen(PORT, () => {
 	})
 	setInterval(function() {
 		http.get("http://osrs-news-scraper.herokuapp.com");
-	}, 300000); // every 5 minutes (300000)
+	}, 600000); // every 10 minutes
 })
